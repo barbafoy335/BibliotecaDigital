@@ -14,8 +14,8 @@ class AuthorController extends Controller
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('nombres_autor', 'like', "%{$search}%")
-                  ->orWhere('apellidos_autor', 'like', "%{$search}%")
-                  ->orWhere('nacionalidad', 'like', "%{$search}%");
+                ->orWhere('apellidos_autor', 'like', "%{$search}%")
+                ->orWhere('nacionalidad', 'like', "%{$search}%");
         }
 
         $authors = $query->orderBy('id_autor', 'desc')->paginate(10);
@@ -31,10 +31,10 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombres_autor' => 'required|string|max:100',
-            'apellidos_autor' => 'required|string|max:100',
-            'nacionalidad' => 'required|string|max:100',
-            'fecha_nacimiento' => 'required|date',
+            'nombres_autor' => 'nullable|string|max:100',
+            'apellidos_autor' => 'nullable|string|max:100',
+            'nacionalidad' => 'nullable|string|max:100',
+            'fecha_nacimiento' => 'nullable|date',
         ]);
 
         Author::create($request->all());

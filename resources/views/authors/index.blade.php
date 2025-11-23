@@ -22,10 +22,10 @@
             <form method="GET" action="{{ route('authors.index') }}" class="row g-3">
                 <div class="col-md-10">
                     <input type="text" 
-                           name="search" 
-                           value="{{ request('search') }}"
-                           class="form-control" 
-                           placeholder="Buscar por nombre o nacionalidad...">
+                        name="search" 
+                        value="{{ request('search') }}"
+                        class="form-control" 
+                        placeholder="Buscar por nombre o nacionalidad...">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Buscar</button>
@@ -68,12 +68,12 @@
                                 <td>{{ \Carbon\Carbon::parse($author->fecha_nacimiento)->format('d/m/Y') }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('authors.edit', $author->id_autor) }}" 
-                                       class="btn btn-sm btn-warning me-1">
+                                    class="btn btn-sm btn-warning me-1">
                                         Editar
                                     </a>
                                     <form action="{{ route('authors.destroy', $author->id_autor) }}" 
-                                          method="POST" 
-                                          class="d-inline">
+                                        method="POST" 
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 

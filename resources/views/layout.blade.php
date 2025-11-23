@@ -20,6 +20,28 @@
         .card:hover {
             transform: translateY(-5px);
         }
+        
+        /* ===== FIX paginador Laravel (flechas gigantes) ===== */
+        /* Normaliza tamaño de los SVG (<, >) en el paginador generado por $collection->links() */
+        nav[role="navigation"] svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* Normaliza tipografía del contenedor del paginador (opcional) */
+        nav[role="navigation"] {
+            font-size: 0.875rem; /* equivalente a text-sm */
+            line-height: 1.25rem;
+        }
+        
+        /* Si tu paginador trae botones en <button>, fuerza alineación vertical */
+        nav[role="navigation"] .pagination .page-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem;
+        }
+        /* ===== FIN FIX ===== */
+
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -48,6 +70,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('authors.index') }}">
                             <i class="bi bi-person"></i> Autores
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('editorials.index') }}">
+                            <i class="bi bi-person"></i> Editoriales
                         </a>
                     </li>
                 </ul>

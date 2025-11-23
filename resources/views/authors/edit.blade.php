@@ -14,23 +14,28 @@
         </div>
     @endif
 
-    <form action="{{ route('authors.update', $author->id) }}" method="POST" class="w-75 mx-auto">
+    <form action="{{ route('authors.update', $author->id_autor) }}" method="POST" class="w-75 mx-auto">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label for="name" class="form-label">Nombre del Autor</label>
-            <input type="text" name="name" id="name" value="{{ old('name', $author->name) }}" class="form-control" required>
+            <label for="nombres_autor" class="form-label">Nombre del Autor</label>
+            <input type="text" name="nombres_autor" id="nombres_autor" value="{{ old('nombres_autor', $author->nombres_autor) }}" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="nationality" class="form-label">Nacionalidad</label>
-            <input type="text" name="nationality" id="nationality" value="{{ old('nationality', $author->nationality) }}" class="form-control">
+            <label for="apellidos_autor" class="form-label">Apellido del Autor</label>
+            <input type="text" name="apellidos_autor" id="apellidos_autor" value="{{ old('apellidos_autor', $author->apellidos_autor) }}" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="birth_date" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $author->birth_date) }}" class="form-control">
+            <label for="nacionalidad" class="form-label">Nacionalidad</label>
+            <input type="text" name="nacionalidad" id="nacionalidad" value="{{ old('nacionalidad', $author->nacionalidad) }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $author->fecha_nacimiento) }}" class="form-control">
         </div>
 
         <div class="d-flex justify-content-between">

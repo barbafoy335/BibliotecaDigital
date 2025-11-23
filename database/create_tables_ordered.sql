@@ -19,17 +19,29 @@ CREATE TABLE categoria (
   observacion text NOT null
 ) ENGINE=InnoDB;
 
--- Tabla LIBRO (se crea al final porque depende de AUTOR y CATEGORIA)
+
+CREATE TABLE editorial (
+    id_editorial INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    telefono VARCHAR(100) not null,
+    correo VARCHAR(100) not null,
+    pais VARCHAR(100) not null
+) engine=InnoDB;
+
+
+-- Tabla LIBRO (se crea al final porque depende de AUTOR, CATEGORIA y editorial)
 CREATE TABLE libro (
   id_libro INT PRIMARY KEY not null AUTO_INCREMENT,
   id_autor int NOT null,
   id_categoria int NOT null,
+  id_editorial int NOT null,
   titulo VARCHAR(100) NOT NULL,
   isbn VARCHAR(100) not null UNIQUE,
-  nombre_editorial VARCHAR(100) NOT null,
   anio_creacion int not null,
   constraint check_anio_creacion check(anio_creacion >= 1971 and anio_creacion <= 2025),
   constraint check_long_isbn check(LENGTH(isbn) between 12 and 17),
-  constraint fk_id_autor foreign key(id_autor) references autor(id_autor) on delete cascade on update cascade,
-  constraint fk_id_categoria foreign key(id_categoria) references categoria(id_categoria) on delete cascade on update cascade
+  constraint fk_id_autor foreign key(id_autor) references autor(id_autor) on delete restrict on update restrict,
+  constraint fk_id_categoria foreign key(id_categoria) references categoria(id_categoria) on delete restrict on update restrict,
+  constraint fk_id_editorial foreign key(id_editorial) references editorial(id_editorial) on delete restrict on update restrict
 ) ENGINE=InnoDB;
+

@@ -21,10 +21,10 @@ class Book extends Model
 
     protected $fillable = [
         'id_autor',
-        'id_categoria', 
+        'id_categoria',
+        'id_editorial', 
         'titulo', 
         'isbn', 
-        'nombre_editorial', 
         'anio_creacion'
     ];
 
@@ -36,6 +36,11 @@ class Book extends Model
     public function categoria()
     {
         return $this->belongsTo(Category::class, 'id_categoria', 'id_categoria');
+    }
+
+    public function editorial()
+    {
+        return $this->belongsTo(Editorial::class, 'id_editorial', 'id_editorial');
     }
 }
 

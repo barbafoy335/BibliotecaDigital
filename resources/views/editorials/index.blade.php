@@ -3,9 +3,9 @@
 @section('content')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold">📘 Lista de Libros</h1>
-        <a href="{{ route('books.create') }}" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Nuevo Libro
+        <h1 class="fw-bold">📘 Lista de Editoriales</h1>
+        <a href="{{ route('editorials.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Nuevo Editorial
         </a>
     </div>
 
@@ -19,29 +19,29 @@
     <!-- Formulario de Búsqueda -->
     <div class="card mb-4 border-0 shadow-sm">
         <div class="card-body">
-            <form action="{{ route('books.index') }}" method="GET" class="row g-3">
+            <form action="{{ route('editorials.index') }}" method="GET" class="row g-3">
                 <div class="col-md-10">
                     <input type="text" 
                         name="search" 
                         value="{{ request('search') }}"
                         class="form-control" 
-                        placeholder="Buscar por título, ISBN o autor...">
+                        placeholder="Buscar por nombre...">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Buscar</button>
                 </div>
                 @if(request('search'))
                     <div class="col-12">
-                        <a href="{{ route('books.index') }}" class="btn btn-sm btn-outline-secondary">Limpiar búsqueda</a>
+                        <a href="{{ route('editorials.index') }}" class="btn btn-sm btn-outline-secondary">Limpiar búsqueda</a>
                     </div>
                 @endif
             </form>
         </div>
     </div>
 
-    @if($books->isEmpty())
+    @if($editorials->isEmpty())
         <div class="alert alert-info text-center">
-            <p class="mb-0">No hay libros registrados aún.</p>
+            <p class="mb-0">No hay editoriales registradas aún.</p>
         </div>
     @else
         <div class="card border-0 shadow-sm">
@@ -50,35 +50,32 @@
                     <table class="table table-hover mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th>Título</th>
-                                <th>Autor</th>
-                                <th>Editorial</th>
-                                <th>Categoría</th>
-                                <th>Año</th>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>País</th>
+                                
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($books as $book)
+                            @foreach($editorials as $editorial)
                             <tr>
-                                <td class="fw-semibold">{{ $book->titulo }}</td>
-                                <td>{{ $book->autor->nombres_autor ?? 'N/A' }} {{ $book->autor->apellidos_autor ?? '' }}</td>
-                                <td>{{ $book->editorial->nombre ?? 'N/A' }}</td>
-                                <td>
-                                    <span class="badge bg-secondary">{{ $book->categoria->nombre_categoria ?? 'N/A' }}</span>
-                                </td>
-                                <td>{{ $book->anio_creacion }}</td>
+                                <td class="fw-semibold">{{ $editorial->nombre }}</td>
+                                <td>{{ $editorial->telefono ?? 'N/A' }}</td>
+                                <td>{{ $editorial->correo ?? 'N/A' }}</td>
+                                <td>{{ $editorial->pais ?? 'N/A' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('books.edit', $book->id_libro)}}" 
+                                    <a href="{{ route('editorials.edit', $editorial->id_editorial)}}" 
                                     class="btn btn-sm btn-warning me-1">
                                         Editar
                                     </a>
-                                    <form action="{{ route('books.destroy', $book->id_libro) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('editorials.destroy', $editorial->id_editorial) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
                                                 class="btn btn-sm btn-danger" 
-                                                onclick="return confirm('¿Seguro que deseas eliminar este libro?')">
+                                                onclick="return confirm('¿Seguro que deseas eliminar esta editorial?')">
                                             Eliminar
                                         </button>
                                     </form>
@@ -92,7 +89,7 @@
         </div>
         <!-- Paginación -->
         <div class="mt-3 d-flex justify-content-end text-center" style= "display:none">
-            {!! $books->links() !!}
+            {!! $editorials->links() !!}
         </div>
         
     @endif

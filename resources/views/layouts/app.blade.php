@@ -23,12 +23,12 @@
 
     <!-- Contenido -->
     <main class="py-4">
-        @yield('content')
+        @yield(section: 'content')
     </main>
 
     <!-- Footer -->
     <footer class="bg-dark text-light text-center py-3 mt-5">
-        <p>© {{ date('Y') }} Biblioteca Digital | ECOTEC</p>
+        <p>© {{ date(format: 'Y') }} Biblioteca Digital | ECOTEC</p>
     </footer>
 
 </body>
